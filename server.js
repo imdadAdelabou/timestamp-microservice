@@ -46,9 +46,12 @@ app.get('/api/:date?', (req, res, next) => {
         }
     } else {
         let convert = req.params.date / 1000;
-        return res.json({ "unix": req.params.date, "utc": new Date(convert * 1000).toUTCString() });
+        let result = new Date(convert * 1000).toUTCString();
+        return res.json({ "unix": req.params.date, "utc": result });
     }
 });
+
+
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT || 3000, function() {
