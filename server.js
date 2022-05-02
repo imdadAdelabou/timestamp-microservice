@@ -40,7 +40,6 @@ app.get('/api/:date?', (req, res, next) => {
         console.log("is valid");
         return res.json({ "ok": "test" });
     } else {
-        console.log("Is invalid");
         return res.json({ "error": "Invalid Date" });
     }
 });
