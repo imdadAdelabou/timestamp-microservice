@@ -35,10 +35,10 @@ app.get('/api/:date?', (req, res, next) => {
     let currentDate = new Date();
     return res.json({ "unix": currentDate.getTime(), "utc": currentDate });
 }, (req, res, next) => {
+    var options = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
     let date = new Date(req.params.date);
     if (date.toDateString() != "Invalid Date") {
-        console.log("is valid");
-        return res.json({ "ok": "test" });
+        return res.json({ "unix": date.getTime(), "utc": date.toLocaleDateString("en-US", options) });
     } else {
         return res.json({ "error": "Invalid Date" });
     }
