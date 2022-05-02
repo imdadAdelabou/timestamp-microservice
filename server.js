@@ -37,10 +37,16 @@ app.get('/api/:date?', (req, res, next) => {
 }, (req, res, next) => {
 
     let date = new Date(req.params.date);
-    if (date.toDateString() != "Invalid Date") {
-        return res.json({ "unix": date.getTime(), "utc": date.toUTCString() });
+    let newDate = new Date(req.params.date * 1000);
+
+    if (Object.is(Number(newDate), NaN)) {
+        if (date.toDateString() != "Invalid Date") {
+            return res.json({ "unix": date.getTime(), "utc": date.toUTCString() });
+        } else {
+            return res.json({ "error": "Invalid Date" });
+        }
     } else {
-        return res.json({ "error": "Invalid Date" });
+        return res.json({ "unix": req.params.date, "utc": newDate.toUTCString() });
     }
 });
 
