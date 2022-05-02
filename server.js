@@ -31,8 +31,8 @@ app.get('/api/:date?', (req, res, next) => {
     if (date != null || date != "") {
         next();
     }
-    let currentDate = new Date().getTime();
-    return res.json({ "unix": currentDate });
+    let currentDate = new Date();
+    return res.json({ "unix": currentDate.getTime(), "utc": currentDate });
 }, (req, res, next) => {
 
 });
